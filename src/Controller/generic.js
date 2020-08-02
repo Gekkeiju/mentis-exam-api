@@ -1,4 +1,5 @@
 const Model = require('../Model')
+const { GenericTransformer } = require('../Transformer')
 
 class GenericController {
     async create(req, res, next) {
@@ -13,11 +14,10 @@ class GenericController {
 
     async readAll(req, res, next) {
         const { route } = req.params
-        const elements = await Model[route].find(null, null,{
-            sort: {
-                created_at: 1
-            }
-        })
+
+        let elements = await Model[route].find()
+
+        elements = await GenericTransformer.applyQueryString(elements, req.params)
 
         res.send(elements)
         return next()

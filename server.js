@@ -41,7 +41,7 @@ server.use(restify.plugins.bodyParser({
     mapParams: true
 }))
 server.use(restify.plugins.queryParser({
-    mapParams: false
+    mapParams: true
 }))
 
 //custom
