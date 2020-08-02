@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const restify = require('restify')
 const mongoose = require('mongoose')
 const corsMiddleware = require('restify-cors-middleware')
