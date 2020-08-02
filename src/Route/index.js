@@ -1,5 +1,6 @@
 const user = require('../Controller/user')
 const generic = require('../Controller/generic')
+const checkAuth = require('../Auth')
 
 module.exports = (server) => {
     /*
