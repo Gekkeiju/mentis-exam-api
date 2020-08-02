@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     PORT: process.env.PORT || 7000,
     DB: process.env.DB || 'mongodb+srv://cluster0.ijrt4.gcp.mongodb.net?retryWrites=true&w=majority',
     DB_OPTIONS : {

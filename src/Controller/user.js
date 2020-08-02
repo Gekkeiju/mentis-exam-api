@@ -1,6 +1,7 @@
 const { User } = require('../Model')
 const { UserSession } = require('../Model')
-const bcrypt = require('bcrypt')
+
+const { UserTransformer } = require('../Transformer')
 
 class UserController {
     async create(req, res, next) {
@@ -8,10 +9,7 @@ class UserController {
 
         const { password } = params
         
-        const salt = bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync(password, salt)
-
-        params.password = hash
+        params.password = await UserTransformer.encryptPassword(password)
         
         const user = await User.create(params)
             .catch(error => {
@@ -28,6 +26,7 @@ class UserController {
     async login(req, res, next) {
         const { username, password } = req.body
 
+        console.log(new UserTransformer)
         const user = await User.findOne({ username })
 
         if(!user) {
@@ -35,7 +34,7 @@ class UserController {
             return next()
         }
 
-        const pass = bcrypt.compareSync(password, user.password)
+        const pass = await UserTransformer(password, user.password)
 
         if(!pass)
             res.send(400, { message: "Incorrect Username or Password" })
