@@ -8,7 +8,7 @@ module.exports = (server) => {
     server.get('/:route', generic.readAll)
     server.get('/:route/:id', generic.read)
 
-    server.post('/:route', generic.create)
+    server.post('/:route', checkAuth, generic.create)
 
     server.put('/:route/:id', generic.update)
 

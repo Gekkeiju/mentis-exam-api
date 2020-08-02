@@ -9,5 +9,7 @@ module.exports = (req, res, next) => {
     if(!token)  
         res.send(401, { message: 'Unauthorized'})
 
+    req.params.token = token
+
     return !token ? next(false) : next()
 }

@@ -46,7 +46,12 @@ class UserController {
                     active: true
                 })
 
-            res.send(200, { user, session_id })
+            const token = await UserTransformer.signToken({
+                username: user.username,
+                session_id 
+            })
+
+            res.send(200, { user, session_id, token })
         }
 
         return next()
