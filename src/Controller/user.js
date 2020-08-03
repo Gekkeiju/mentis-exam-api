@@ -26,7 +26,6 @@ class UserController {
     async login(req, res, next) {
         const { username, password } = req.body
 
-        console.log(new UserTransformer)
         const user = await User.findOne({ username })
 
         if(!user) {
@@ -34,7 +33,7 @@ class UserController {
             return next()
         }
 
-        const pass = await UserTransformer(password, user.password)
+        const pass = await UserTransformer.checkPassword(password, user.password)
 
         if(!pass)
             res.send(400, { message: "Incorrect Username or Password" })

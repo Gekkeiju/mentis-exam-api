@@ -15,7 +15,7 @@ class UserTransformer {
     }
 
     async signToken(data) {
-        return jwt.sign(data, proces.env.TOKEN_SECRET)
+        return jwt.sign(data, process.env.TOKEN_SECRET)
     }
 
     async verifyToken(token) {

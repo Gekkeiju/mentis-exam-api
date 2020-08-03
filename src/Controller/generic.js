@@ -8,13 +8,13 @@ class GenericController {
 
         const { username } = await UserTransformer.verifyToken(token)
 
-        if(username && username.length){
-            console.log(`${username} created something!`)
-        }
+        let temp = `${username && username.length ? username: 'Nobody'} created something!`
+
+        console.log(temp)
 
         const element = await Model[route].create(params)
 
-        res.send(200, element)
+        res.send(200, { element, log: temp})
         return next()
     }
 
