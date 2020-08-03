@@ -10,9 +10,9 @@ module.exports = (server) => {
 
     server.post('/:route', checkAuth, generic.create)
 
-    server.put('/:route/:id', generic.update)
+    server.put('/:route/:id', checkAuth, generic.update)
 
-    server.del('/:route/:id', generic.delete)
+    server.del('/:route/:id', checkAuth, generic.delete)
 
     /*
     * user */

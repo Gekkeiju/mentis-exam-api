@@ -57,9 +57,9 @@ class GenericController {
     async delete(req, res, next) {
         const { route, _id } = req.params
         
-        await Model[route].deleteOne({ _id })
+        const { ok } = await Model[route].deleteOne({ _id })
 
-        res.send(200, { deleted: true })
+        res.send(200, { deleted: !!ok })
         return next()
     }
 }
